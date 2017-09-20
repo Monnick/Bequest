@@ -1,17 +1,17 @@
 <div class="well row">
-  <div class="col-md-12">
+  <div class="col-sm-12">
     <label>{{ project.title }}</label>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <label class="label label-default">Category: {{ project.category }}</label>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <label class="label text-right" [ngClass]="state === 'New' ? 'label-danger' : state === 'Online' ? 'label-success' : 'label-default'">State: {{ state }}</label>
   </div>
-  <div class="col-md-6">
-    <label class="label label-default">Updated at: {{ project.updatedAt | date:'mediumDate' }}</label>
+  <div class="col-sm-6">
+    <label class="label label-default">Updated at: {{ project.updatedAt | date:'shortDate' }}</label>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <label class="label label-default text-right">Views: {{ project.views }}</label>
   </div>
 </div>

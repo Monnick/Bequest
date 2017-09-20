@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from "@angular/http";
-import { MdFormFieldModule, MdInputModule } from '@angular/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './components/account/account.component';
@@ -62,9 +60,6 @@ import { ProjectInfoComponent } from './components/my-projects/project-info/proj
     ReactiveFormsModule,
     HttpModule,
     FileUploadModule,
-    NoopAnimationsModule,
-    MdFormFieldModule,
-    MdInputModule,
     routing
   ],
   providers: [

@@ -39,6 +39,7 @@ namespace BackEnd.Services
 			{
 				Category = GetCategory(project.Category),
 				CreatedAt = now,
+				Title = project.Title,
 				InitiatorId = accountId,
 				State = Entities.State.New,
 				Views = 0
@@ -105,12 +106,8 @@ namespace BackEnd.Services
 		
 		private void UpdateProject(ref Entities.Projects.Project entity, Guid accountId, Project project)
 		{
-			entity.Category = GetCategory(project.Category);
 			entity.UpdatedAt = DateTime.UtcNow;
-			entity.Id = project.Id;
-			entity.InitiatorId = accountId;
 			entity.State = project.State;
-			entity.Title = project.Title;
 			entity.ContactName = project.ContactData.Name;
 			entity.Email = project.ContactData.Email;
 			entity.Phone = project.ContactData.Phone;

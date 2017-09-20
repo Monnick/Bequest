@@ -7,16 +7,20 @@ import { ProjectInfo } from '../models/dtos/project.info';
 
 @Injectable()
 export class InfoService extends SecuredService {
-  
-    constructor(http: Http, config: AppConfig) {
-      super(config.apiUrl + '/info', http);
-    }
 
-    getIds() : Observable<string[]> {
-      return this._get('/ids');
-    }
+  constructor(http: Http, config: AppConfig) {
+    super(config.apiUrl + '/info', http);
+  }
 
-    getInfo(projectId : string) : Observable<ProjectInfo> {
-      return this._get('/' + projectId);
-    }
+  getIds() : Observable<string[]> {
+    return this._get('/ids');
+  }
+
+  getProjects() : Observable<ProjectInfo[]> {
+    return this._get('/');
+  }
+
+  getInfo(projectId : string) : Observable<ProjectInfo> {
+    return this._get('/' + projectId);
+  }
 }

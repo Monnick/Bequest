@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
 import { InfoService } from '../../services/info.service';
 import { BasicComponent } from '../basic.component';
+import { ProjectInfo } from '../../models/dtos/project.info';
 
 @Component({
   selector: 'app-my-projects',
@@ -9,7 +10,7 @@ import { BasicComponent } from '../basic.component';
 })
 export class MyProjectsComponent extends BasicComponent implements OnInit {
 
-  private ids : string[];
+  private projects : ProjectInfo[];
 
   constructor(
     alertService : AlertService,
@@ -19,9 +20,9 @@ export class MyProjectsComponent extends BasicComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.getIds().subscribe(ids => {
+    this.projectService.getProjects().subscribe(projects => {
       // assign user object
-      this.ids = ids;
+      this.projects = projects;
       this.isNewDataSet = false;
     }, error => {
       // handle user not found

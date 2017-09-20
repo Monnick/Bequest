@@ -5,7 +5,7 @@
       <alert></alert>
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group" [ngClass]="{ 'has-error': login.touched && !login.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': login.touched && !login.valid, 'has-warning': login.untouched && login.errors }">
             <label class="col-md-3 control-label" for="login">Login</label>
             <div  class="col-md-8">
               <input type="text" class="form-control" name="login" [(ngModel)]="model.login" #login="ngModel" [disabled]="!isNewDataSet" required [autofocus]="isNewDataSet"/>
@@ -17,22 +17,22 @@
           <div *ngIf="!isNewDataSet" class="form-group" [ngClass]="{ 'has-error': oldpassword.touched && !oldpassword.valid }">
             <label class="col-md-3 control-label" for="oldpassword">Old password</label>
             <div  class="col-md-8">
-              <input type="password" class="form-control" name="oldpassword" [(ngModel)]="model.oldpassword" #oldpassword="ngModel"  [autofocus]="!isNewDataSet"/>
+              <input type="password" class="form-control" name="oldpassword" [(ngModel)]="model.oldpassword" #oldpassword="ngModel" [autofocus]="!isNewDataSet"/>
               <div *ngIf="oldpassword.touched && !oldpassword.valid" class="alert alert-danger">
                 <div *ngIf="oldpassword.errors.required">Old password is required</div>
               </div>
             </div>
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': password.touched && !password.valid, 'has-warning': password.untouched && password.errors }">
             <label class="col-md-3 control-label" for="password">Password</label>
             <div  class="col-md-8">
-              <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" />
+              <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [required]="isNewDataSet" />
               <div *ngIf="password.touched && !password.valid" class="alert alert-danger">
                 <div *ngIf="password.errors.required">Password is required</div>
               </div>
             </div>
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': name.touched && !name.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': name.touched && !name.valid, 'has-warning': name.untouched && name.errors }">
             <label class="col-md-3 control-label" for="name">Name</label>
             <div  class="col-md-8">
               <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required/>
@@ -41,7 +41,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': email.touched && !email.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': email.touched && !email.valid, 'has-warning': email.untouched && email.errors }">
             <label class="col-md-3 control-label" for="email">Email</label>
             <div  class="col-md-8">
               <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
@@ -50,7 +50,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid }">
+          <div *ngIf="isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid, 'has-warning': country.untouched && country.errors }">
             <label class="col-md-3 control-label" for="country">Country</label>
             <div  class="col-md-8">
               <select class="form-control" [(ngModel)]="model.country" name="country" #country="ngModel" id="country" required>
@@ -88,7 +88,7 @@
               <input type="text" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" />
             </div>
           </div>
-          <div *ngIf="!isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid }">
+          <div *ngIf="!isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid, 'has-warning': country.untouched && country.errors }">
             <label class="col-md-3 control-label" for="country">Country</label>
             <div  class="col-md-8">
               <select class="form-control" [(ngModel)]="model.country" name="country" #country="ngModel" id="country" required>

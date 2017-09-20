@@ -1,10 +1,10 @@
 <div class="container-fluid">
-  <div *ngFor="let id of ids" class="col-md-5 col-md-offset-1">
-    <a [routerLink]="['/project', id]">
-      <project-info [projectId]="id"></project-info>
+  <div *ngFor="let p of projects" class="col-sm-5 col-sm-offset-1">
+    <a [routerLink]="['/project', p.id]">
+      <project-info [project]="p"></project-info>
     </a>
   </div>
-  <div class="col-md-5 col-md-offset-1">
+  <div class="col-sm-5 col-sm-offset-1">
     <a routerLink="/project/new">
       <div class="well row">
         <label class="label label-info">New project</label>

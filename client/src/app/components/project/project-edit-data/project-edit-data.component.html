@@ -2,19 +2,19 @@
   <form name="form" class="form-horizontal" (ngSubmit)="save()" #f="ngForm" novalidate>
     <fieldset>
       <div class="well">
-        <div class="form-group" [ngClass]="{ 'has-error': title.touched && title.errors }">
+        <div class="form-group" [ngClass]="{ 'has-error': title.touched && title.errors, 'has-warning': title.untouched && title.errors }">
           <label class="col-md-2 control-label" for="title">Title</label>
           <div  class="col-md-10">
-            <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" [disabled]="!isNewDataSet" required [autofocus]="isNewDataSet"/>
+            <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" [disabled]="!isNewDataSet" required [autofocus]="isNewDataSet" placeholder="cannot be changed after saving"/>
             <div *ngIf="title.touched && title.errors" class="alert alert-danger">
               <div *ngIf="title.errors.required">Title is required</div>
             </div>
           </div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': category.touched && category.errors }">
+        <div class="form-group" [ngClass]="{ 'has-error': category.touched && category.errors, 'has-warning': category.untouched && category.errors }">
           <label class="col-md-2 control-label" for="category">Category</label>
           <div  class="col-md-10">
-            <input type="text" class="form-control" name="category" [(ngModel)]="model.category" #category="ngModel" list="categoryfield" [disabled]="!isNewDataSet" required/>
+            <input type="text" class="form-control" name="category" [(ngModel)]="model.category" #category="ngModel" list="categoryfield" [disabled]="!isNewDataSet" required placeholder="cannot be changed after saving"/>
             <div *ngIf="category.touched && category.errors" class="alert alert-danger">
               <div *ngIf="category.errors.required">Category is required</div>
             </div>
@@ -23,7 +23,7 @@
             </datalist>
           </div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': state.touched && state.errors }">
+        <div class="form-group" [ngClass]="{ 'has-error': state.touched && state.errors, 'has-warning': state.untouched && state.errors }">
           <label class="col-md-2 control-label" for="state">State</label>
           <div  class="col-md-10">
             <select class="form-control" [(ngModel)]="model.state" name="state" #state="ngModel" required [disabled]="isNewDataSet">
@@ -35,15 +35,18 @@
           </div>
         </div>
         <div class="form-group" *ngIf="!isNewDataSet">
-          <label class="col-md-2 control-label">Project url</label>
-          <div  class="col-md-10">
-            <label>{{ projectUrl }}</label>
+          <label class="col-md-2 control-label">Project url / preview</label>
+          <div class="col-md-10">
+            <a [routerLink]="['/overview', model.id]">
+              <label>{{ projectUrl }}</label>
+            </a>
           </div>
         </div>
       </div>
       <div>
         <zippy title="Contact data" [isExpanded]="isNewDataSet">
-          <div class="form-group" [ngClass]="{ 'has-error': name.touched && name.errors }">
+          <label class="col-md-10">The contact data will be public for everyone to see.</label>
+          <div class="form-group" [ngClass]="{ 'has-error': name.touched && name.errors, 'has-warning': name.untouched && name.errors }">
             <label class="col-md-2 control-label" for="name">Name</label>
             <div  class="col-md-10">
               <input type="text" class="form-control" name="name" [(ngModel)]="model.contactData.name" #name="ngModel" required/>
@@ -52,7 +55,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': email.touched && email.errors }">
+          <div class="form-group" [ngClass]="{ 'has-error': email.touched && email.errors, 'has-warning': email.untouched && email.errors }">
             <label class="col-md-2 control-label" for="email">Email</label>
             <div  class="col-md-10">
               <input type="text" class="form-control" name="email" [(ngModel)]="model.contactData.email" #email="ngModel" required />
@@ -91,7 +94,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': country.touched && country.errors }">
+          <div class="form-group" [ngClass]="{ 'has-error': country.touched && country.errors, 'has-warning': country.untouched && country.errors }">
             <label class="col-md-2 control-label" for="country">Country</label>
             <div  class="col-md-10">
               <select class="form-control" [(ngModel)]="model.contactData.country" name="country" #country="ngModel" id="country" required>
