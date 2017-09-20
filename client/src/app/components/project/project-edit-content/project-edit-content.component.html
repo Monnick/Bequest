@@ -1,0 +1,14 @@
+<div class="col-md-12">
+  <form name="form" class="form-horizontal" (ngSubmit)="save()" #f="ngForm" novalidate>
+    <fieldset>
+      <div class="form-group">
+        <textarea id="project-content-editor" [tinyEditor] [selector]="'project-content-editor'" [(ngModel)]="content.data" (ngModelChange) = "doNothing()" name="project-content-editor"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="col-md-11 col-md-offset-5">
+          <button [disabled]="loading" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

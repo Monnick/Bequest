@@ -1,0 +1,42 @@
+<div class="col-md-10 col-md-offset-1">
+  <form name="form" class="form-horizontal" (ngSubmit)="saveItems()" #f="ngForm" novalidate>
+    <fieldset>
+      <div class="well col-md-12">
+        <div class="table-responsive">          
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="40%">Name</th>
+                <th width="25%">Received</th>
+                <th width="25%">Needed</th>
+                <th width="10%">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items.items">
+                <td>
+                  <input type="text" class="form-control" name="name" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.name"/>
+                </td>
+                <td>
+                  <up-down-input [value]="item.quantity" (valueChange)="item.quantity=$event" name="quantity"></up-down-input>
+                </td>
+                <td>
+                  <up-down-input [(value)]="item.needed" name="needed"></up-down-input>
+                </td>
+                <td><span class="glyphicon glyphicon-remove" (click)="removeItem(item)"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+          <button type="button" class="btn btn-info" (click)="add()">Add</button>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group">
+      <div class="col-md-10 col-md-offset-5">
+        <button type="submit" [disabled]="loading || f.invalid" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

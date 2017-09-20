@@ -1,0 +1,113 @@
+<div class="col-md-10 col-md-offset-1 well">
+  <form name="form" class="form-horizontal" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+    <fieldset>
+      <legend>{{ isNewDataSet ? 'Register' : 'Edit account' }}</legend>
+      <alert></alert>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" [ngClass]="{ 'has-error': login.touched && !login.valid }">
+            <label class="col-md-3 control-label" for="login">Login</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="login" [(ngModel)]="model.login" #login="ngModel" [disabled]="!isNewDataSet" required [autofocus]="isNewDataSet"/>
+              <div *ngIf="login.touched && !login.valid" class="alert alert-danger">
+                <div *ngIf="login.errors.required">Login is required</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!isNewDataSet" class="form-group" [ngClass]="{ 'has-error': oldpassword.touched && !oldpassword.valid }">
+            <label class="col-md-3 control-label" for="oldpassword">Old password</label>
+            <div  class="col-md-8">
+              <input type="password" class="form-control" name="oldpassword" [(ngModel)]="model.oldpassword" #oldpassword="ngModel"  [autofocus]="!isNewDataSet"/>
+              <div *ngIf="oldpassword.touched && !oldpassword.valid" class="alert alert-danger">
+                <div *ngIf="oldpassword.errors.required">Old password is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+            <label class="col-md-3 control-label" for="password">Password</label>
+            <div  class="col-md-8">
+              <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" />
+              <div *ngIf="password.touched && !password.valid" class="alert alert-danger">
+                <div *ngIf="password.errors.required">Password is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': name.touched && !name.valid }">
+            <label class="col-md-3 control-label" for="name">Name</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required/>
+              <div *ngIf="name.touched && !name.valid" class="alert alert-danger">
+                <div *ngIf="name.errors.required">Name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': email.touched && !email.valid }">
+            <label class="col-md-3 control-label" for="email">Email</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+              <div *ngIf="email.touched && !email.valid" class="alert alert-danger">
+                <div *ngIf="email.errors.required">Email is required</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid }">
+            <label class="col-md-3 control-label" for="country">Country</label>
+            <div  class="col-md-8">
+              <select class="form-control" [(ngModel)]="model.country" name="country" #country="ngModel" id="country" required>
+                <option value=""></option>
+                <option *ngFor="let c of countries" [value]="c.name">{{ c.name }}</option>
+              </select>
+              <div *ngIf="country.touched && !country.valid" class="alert alert-danger">
+                <div *ngIf="country.errors.required">Country is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="phone">Phone</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="phone" [(ngModel)]="model.phone" #phone="ngModel" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="street">Street</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="street" [(ngModel)]="model.street" #street="ngModel" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="zip">Zip</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="zip" [(ngModel)]="model.zip" #zip="ngModel" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="city">City</label>
+            <div  class="col-md-8">
+              <input type="text" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" />
+            </div>
+          </div>
+          <div *ngIf="!isNewDataSet" class="form-group" [ngClass]="{ 'has-error': country.touched && !country.valid }">
+            <label class="col-md-3 control-label" for="country">Country</label>
+            <div  class="col-md-8">
+              <select class="form-control" [(ngModel)]="model.country" name="country" #country="ngModel" id="country" required>
+                <option value=""></option>
+                <option *ngFor="let c of countries" [value]="c.name">{{ c.name }}</option>
+              </select>
+              <div *ngIf="country.touched && !country.valid" class="alert alert-danger">
+                <div *ngIf="country.errors.required">Country is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-10 col-md-offset-5">
+          <button [disabled]="loading" class="btn btn-primary">{{ isNewDataSet ? 'Register' : 'Save' }}</button>
+          <a *ngIf="isNewDataSet" [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

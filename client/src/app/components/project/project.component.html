@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <legend>{{ newProject ? 'New project' : 'Edit project' }}</legend>
+  <alert></alert>
+  <zippy title="General data" [isExpanded]="newProject"><project-edit-data></project-edit-data></zippy>
+  <zippy title="Background picture" [isEnabled]="!newProject"><project-edit-picture></project-edit-picture></zippy>
+  <zippy title="Description" [isEnabled]="!newProject" [isExpanded]="!newProject"><project-edit-content></project-edit-content></zippy>
+  <zippy title="Needed items" [isEnabled]="!newProject" [isExpanded]="false"><project-edit-items></project-edit-items></zippy>
+</div>

@@ -1,0 +1,116 @@
+<div class="col-md-10 col-md-offset-1">
+  <form name="form" class="form-horizontal" (ngSubmit)="save()" #f="ngForm" novalidate>
+    <fieldset>
+      <div class="well">
+        <div class="form-group" [ngClass]="{ 'has-error': title.touched && title.errors }">
+          <label class="col-md-2 control-label" for="title">Title</label>
+          <div  class="col-md-10">
+            <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" [disabled]="!isNewDataSet" required [autofocus]="isNewDataSet"/>
+            <div *ngIf="title.touched && title.errors" class="alert alert-danger">
+              <div *ngIf="title.errors.required">Title is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': category.touched && category.errors }">
+          <label class="col-md-2 control-label" for="category">Category</label>
+          <div  class="col-md-10">
+            <input type="text" class="form-control" name="category" [(ngModel)]="model.category" #category="ngModel" list="categoryfield" [disabled]="!isNewDataSet" required/>
+            <div *ngIf="category.touched && category.errors" class="alert alert-danger">
+              <div *ngIf="category.errors.required">Category is required</div>
+            </div>
+            <datalist id="categoryfield">
+              <option *ngFor="let c of categories" value="{{ c.title }}"></option>
+            </datalist>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': state.touched && state.errors }">
+          <label class="col-md-2 control-label" for="state">State</label>
+          <div  class="col-md-10">
+            <select class="form-control" [(ngModel)]="model.state" name="state" #state="ngModel" required [disabled]="isNewDataSet">
+              <option *ngFor="let s of states" [value]="s.value">{{ s.text }}</option>
+            </select>
+            <div *ngIf="state.touched && state.errors" class="alert alert-danger">
+              <div *ngIf="state.errors.required">State is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="!isNewDataSet">
+          <label class="col-md-2 control-label">Project url</label>
+          <div  class="col-md-10">
+            <label>{{ projectUrl }}</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <zippy title="Contact data" [isExpanded]="isNewDataSet">
+          <div class="form-group" [ngClass]="{ 'has-error': name.touched && name.errors }">
+            <label class="col-md-2 control-label" for="name">Name</label>
+            <div  class="col-md-10">
+              <input type="text" class="form-control" name="name" [(ngModel)]="model.contactData.name" #name="ngModel" required/>
+              <div *ngIf="name.touched && name.errors" class="alert alert-danger">
+                <div *ngIf="name.errors.required">Name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': email.touched && email.errors }">
+            <label class="col-md-2 control-label" for="email">Email</label>
+            <div  class="col-md-10">
+              <input type="text" class="form-control" name="email" [(ngModel)]="model.contactData.email" #email="ngModel" required />
+              <div *ngIf="email.touched && email.errors" class="alert alert-danger">
+                <div *ngIf="email.errors.required">Email is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="phone">Phone</label>
+            <div  class="col-md-10">
+              <input type="text" class="form-control" name="phone" [(ngModel)]="model.contactData.phone" #phone="ngModel" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="street">Street</label>
+            <div  class="col-md-10">
+              <input type="text" class="form-control" name="street" [(ngModel)]="model.contactData.street" #street="ngModel" />
+            </div>
+          </div>
+          <div class="row col-md-12">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="zip">Zip</label>
+                <div  class="col-md-8">
+                  <input type="text" class="form-control" name="zip" [(ngModel)]="model.contactData.zip" #zip="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="city">City</label>
+                <div  class="col-md-9">
+                  <input type="text" class="form-control" name="city" [(ngModel)]="model.contactData.city" #city="ngModel" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': country.touched && country.errors }">
+            <label class="col-md-2 control-label" for="country">Country</label>
+            <div  class="col-md-10">
+              <select class="form-control" [(ngModel)]="model.contactData.country" name="country" #country="ngModel" id="country" required>
+                <option value=""></option>
+                <option *ngFor="let c of countries" [value]="c.name">{{ c.name }}</option>
+              </select>
+              <div *ngIf="country.touched && country.errors" class="alert alert-danger">
+                <div *ngIf="country.errors.required">Country is required</div>
+              </div>
+            </div>
+          </div>
+        </zippy>
+      </div>
+      <div class="form-group">
+        <div class="col-md-10 col-md-offset-5">
+          <button [disabled]="loading || f.invalid" class="btn btn-primary">{{ isNewDataSet ? 'Create' : 'Save' }}</button>
+          <a *ngIf="isNewDataSet" [routerLink]="['/myprojects']" class="btn btn-link">Cancel</a>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
