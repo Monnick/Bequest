@@ -1,3 +1,4 @@
+import { InfoService } from './../../../services/info.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { BasicComponent } from '../../basic.component';
 import { AlertService } from '../../../services/alert.service';
@@ -15,10 +16,12 @@ export class ProjectInfoComponent extends BasicComponent implements OnInit {
   state : string = State.toText(0);
   url : string;
   states : State[];
+  valueChanged : boolean;
 
   constructor(
     alertService : AlertService,
-    private config :AppConfig,
+    private config : AppConfig,
+    private infoService : InfoService
   ) {
     super(alertService);
   }
@@ -29,5 +32,21 @@ export class ProjectInfoComponent extends BasicComponent implements OnInit {
       this.state = State.toText(this.project.state);
       this.states = State.format(this.project.possibleStates);
     }
+  }
+
+  anyValueChanged() {
+    this.valueChanged = true;
+  }
+
+  save() {
+    this.valueChanged = false;
+    
+    this.infoService.updateItems(this.project.id, this.project.neededItems)
+      .subscribe(
+        data => {
+          this.alertService.success('Change successful');
+          this.loading = false;
+        },
+        err => this.handleError(err));
   }
 }

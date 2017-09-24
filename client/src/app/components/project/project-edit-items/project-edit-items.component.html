@@ -2,7 +2,7 @@
   <form name="form" class="form-horizontal" (ngSubmit)="saveItems()" #f="ngForm" novalidate>
     <fieldset>
       <div class="well col-md-12">
-        <div class="table-responsive">          
+        <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -21,7 +21,7 @@
                   <up-down-input [value]="item.quantity" (valueChange)="item.quantity=$event" name="quantity"></up-down-input>
                 </td>
                 <td>
-                  <up-down-input [(value)]="item.needed" name="needed"></up-down-input>
+                  <up-down-input [(value)]="item.needed" (valueChange)="item.needed=$event" name="needed"></up-down-input>
                 </td>
                 <td><span class="glyphicon glyphicon-remove" (click)="removeItem(item)"></span></td>
               </tr>

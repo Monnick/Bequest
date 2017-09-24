@@ -9,5 +9,7 @@ namespace BackEnd.Services.Contracts
     public interface IBasicService
     {
 		IEnumerable<Models.Country> GetCountries();
+
+		IEnumerable<Models.Category> GetCategories();
 	}
 }

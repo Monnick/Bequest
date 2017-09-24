@@ -42,7 +42,7 @@ namespace BackEnd.Controllers
 		{
 			try
 			{
-				return Ok(Service.GetCountries());
+				return Ok(Service.GetCategories());
 			}
 			catch (Exception ex)
 			{

@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading text-center"><span style="float:left;" class="glyphicon glyphicon-chevron-left" (click)="onPrevious()"></span>{{ title }}<span><ng-content></ng-content></span><span style="float:right;" class="glyphicon glyphicon-chevron-right" (click)="onNext()"></span></div>
+  <div class="panel-body">
+    <div class="container-fluid">
+      <div *ngFor="let p of projects" class="col-md-3 col-md-offset-1">
+        <project-thumbnail [project]="p"></project-thumbnail>
+      </div>
+    </div>
+  </div>
+</div>

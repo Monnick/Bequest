@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BackEnd.Configuration;
 using BackEnd.Services.Contracts;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Controllers
 {
+	[EnableCors("SiteCorsPolicy")]
 	[Route("overview")]
     public class OverviewController : BasicController<IProjectOverviewService>
 	{
-		const int PAGE_SIZE = 10;
+		const int DEFAULT_PAGE_SIZE = 10;
 
 		public OverviewController(
 			IProjectOverviewService projectService,
@@ -27,28 +29,21 @@ namespace BackEnd.Controllers
 		{
 			return Ok(Service.Get(projectId));
 		}
-
-		[Route("Latest")]
+		
 		[HttpGet]
-		public IActionResult Latest()
+		public IActionResult Get([FromQuery]string category, [FromQuery]string country, [FromQuery]string orderBy, [FromQuery]string page, [FromQuery]string size)
 		{
-			return Ok(Service.GetLatestProjects(PAGE_SIZE, 0));
-		}
+			int pageNumber = 0;
+			int pageSize = 0;
+			OrderBy order = string.IsNullOrEmpty(orderBy) ? OrderBy.Undefined : orderBy == "mv" ? OrderBy.Views : OrderBy.Updated;
 
-		[Route("Top")]
-		[HttpGet()]
-		public IActionResult Top()
-		{
-			return Ok(Service.GetTopProjects(PAGE_SIZE, 0));
-		}
+			if (!int.TryParse(page, out pageNumber))
+				pageNumber = 0;
 
-		[HttpPost("GetByCountry/{country}")]
-		public IActionResult GetByCountry(string country)
-		{
-			if (string.IsNullOrEmpty(country))
-				BadRequest("Country is needed.");
+			if (!int.TryParse(size, out pageSize))
+				pageSize = DEFAULT_PAGE_SIZE;
 
-			return Ok(Service.GetProjectsByCountry(PAGE_SIZE, 0, country));
+			return Ok(Service.GetProjects(pageNumber, pageSize, order, category, country));
 		}
 	}
 }

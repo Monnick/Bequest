@@ -16,15 +16,10 @@ namespace BackEnd.Services
 		public ProjectInfoService(DataContext context) : base(context)
 		{
 		}
-
-		public IEnumerable<Guid> GetProjectIds(Guid accountId)
-		{
-			return Context.Projects.Where(p => p.InitiatorId == accountId).Select(p => p.Id);
-		}
-
+		
 		public IEnumerable<ProjectInfo> GetProjects(Guid accountId)
 		{
-			return Context.Projects.Where(p => p.InitiatorId == accountId).Select(p => new ProjectInfo
+			return GetProjectsByAccount(accountId).ToList().Select(p => new ProjectInfo
 			{
 				Id = p.Id,
 				Title = p.Title,
@@ -32,24 +27,42 @@ namespace BackEnd.Services
 				UpdatedAt = p.UpdatedAt,
 				State = p.State,
 				PossibleStates = p.State.GetPossibleStates(),
-				Views = p.Views
+				Views = p.Views,
+				NeededItems = p.Items.Select(i => new NeededItem
+				{
+					Id = i.Id,
+					Name = i.Name,
+					Needed = i.Needed,
+					Quantity = i.Quantity
+				})
 			});
 		}
 
-		public ProjectInfo GetProject(Guid projectId)
+		private IQueryable<Entities.Projects.Project> GetProjectsByAccount(Guid accountId)
 		{
-			var project = Context.Projects.Include(p => p.Category).Single(p => p.Id == projectId);
-			
-			return new ProjectInfo
+			return Context.Projects.Where(p => p.InitiatorId == accountId).Include(c => c.Category).Include(c => c.Items);
+		}
+
+		public NeededItems UpdateNeededItems(NeededItems items)
+		{
+			var guids = items.Items.Select(i => i.Id).ToList();
+			var entities = Context.NeededItems.Where(i => i.ProjectId == items.ProjectId && guids.Contains(i.Id));
+
+			foreach (var entity in entities)
 			{
-				Id = project.Id,
-				Title = project.Title,
-				Category = project.Category == null ? "" : project.Category.Title,
-				UpdatedAt = project.UpdatedAt,
-				State = project.State,
-				PossibleStates = project.State.GetPossibleStates(),
-				Views = project.Views
-			};
+				var item = items.Items.FirstOrDefault(i => i.Id == entity.Id);
+
+				if (item == null)
+					continue;
+
+				entity.Needed = item.Needed;
+				entity.Quantity = item.Quantity;
+			}
+
+			Context.NeededItems.UpdateRange(entities);
+			Context.SaveChanges();
+
+			return items;
 		}
 
 		public void SetProjectState(Guid accountId, Guid projectId, State state)

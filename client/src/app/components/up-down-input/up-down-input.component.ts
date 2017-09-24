@@ -6,6 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UpDownInputComponent {
 
+  @Input('additionalClasses') additionalClasses: string;
   @Input('value') value : number = 0;
   @Input('min') min : number = 0;
   @Output('valueChange') valueChange : EventEmitter<number>;

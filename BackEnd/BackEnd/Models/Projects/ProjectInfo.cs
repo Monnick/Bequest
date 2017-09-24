@@ -21,5 +21,7 @@ namespace BackEnd.Models.Projects
 		public int Views { get; set; }
 
 		public DateTime UpdatedAt { get; set; }
+
+		public IEnumerable<NeededItem> NeededItems { get; set; }
 	}
 }

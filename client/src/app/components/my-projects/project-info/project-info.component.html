@@ -1,17 +1,31 @@
 <div class="well row">
+  <a [routerLink]="['/project', project.id]">
+    <div class="col-sm-12">
+      <label>{{ project.title }}</label>
+    </div>
+    <div class="col-sm-6">
+      <label class="label label-default">Category: {{ project.category }}</label>
+    </div>
+    <div class="col-sm-6">
+      <label class="label text-right" [ngClass]="state === 'New' ? 'label-danger' : state === 'Online' ? 'label-success' : 'label-default'">State: {{ state }}</label>
+    </div>
+    <div class="col-sm-6">
+      <label class="label label-default">Updated at: {{ project.updatedAt | date:'shortDate' }}</label>
+    </div>
+    <div class="col-sm-6">
+      <label class="label label-default text-right">Views: {{ project.views }}</label>
+    </div>
+  </a>
   <div class="col-sm-12">
-    <label>{{ project.title }}</label>
-  </div>
-  <div class="col-sm-6">
-    <label class="label label-default">Category: {{ project.category }}</label>
-  </div>
-  <div class="col-sm-6">
-    <label class="label text-right" [ngClass]="state === 'New' ? 'label-danger' : state === 'Online' ? 'label-success' : 'label-default'">State: {{ state }}</label>
-  </div>
-  <div class="col-sm-6">
-    <label class="label label-default">Updated at: {{ project.updatedAt | date:'shortDate' }}</label>
-  </div>
-  <div class="col-sm-6">
-    <label class="label label-default text-right">Views: {{ project.views }}</label>
+    <form name="form" class="form-horizontal" (ngSubmit)="save()" #f="ngForm" novalidate>
+      <fieldset>
+        <needed-item-view (valueChange)="anyValueChanged()" [items]="project.neededItems"></needed-item-view>
+        <div class="form-group" *ngIf="valueChanged">
+          <div class="col-md-10 col-md-offset-5">
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
   </div>
 </div>

@@ -1,3 +1,8 @@
-<p>
-  home works!
-</p>
+<paged-view title="Most viewed" orderBy="mv"></paged-view>
+<paged-view title="Newest" orderBy="new"></paged-view>
+<paged-view *ngIf="categories" delayedLoading="true" [category]="categoryFilter" title="By category" orderBy="mv" (change)="categoryFilter = $event.target.value">
+  <select>
+	<option value=""></option>
+    <option *ngFor="let c of categories" [value]="c.title">{{ c.title }}</option>
+  </select>
+</paged-view>

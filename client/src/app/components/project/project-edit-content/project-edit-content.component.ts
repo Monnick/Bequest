@@ -35,11 +35,9 @@ export class ProjectEditContentComponent extends BasicComponent implements OnIni
 
   loadProject(projectId) {
     this.contentService.get(projectId).subscribe(content => {
-      // assign user object
       this.content.data = content.data;
       this.isNewDataSet = false;
     }, error => {
-      // handle user not found
       this.isNewDataSet = true;
       this.handleError(error);
     });

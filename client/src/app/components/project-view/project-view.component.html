@@ -1,0 +1,21 @@
+<img *ngIf="pictureUrl" [src]="pictureUrl" style="display: block; margin-left: auto; margin-right: auto;" class="img-responsive">
+<div class="col-md-10 col-md-offset-1">
+  <h1>{{ model?.title }}</h1>
+  {{ model?.category }}
+</div>
+<div class="col-md-7 col-md-offset-2" [innerHtml]="model?.content">
+</div>
+<div class="col-md-2 well">
+  <ul style="list-style-type:none" *ngIf="model && model.contactData">
+      <li><label class="label label-default">Contact data</label></li>
+      <li *ngIf="model.contactData.name"><label class="label label-default">Name:</label><label> {{ model.contactData.name }}</label></li>
+      <li *ngIf="model.contactData.email"><label class="label label-default">Email:</label><label> {{ model.contactData.email }}</label></li>
+      <li *ngIf="model.contactData.street"><label class="label label-default">Street:</label><label> {{ model.contactData.street }}</label></li>
+      <li *ngIf="model.contactData.zip && model.contactData.city"><label class="label label-default">City:</label><label> {{ model.contactData.zip }} {{ model.contactData.city }}</label></li>
+      <li *ngIf="model.contactData.country"><label class="label label-default">Country:</label><label> {{ model.contactData.country }}</label></li>
+    </ul>
+</div>
+<div class="col-md-2 well" style="min-width: 200px;" *ngIf="model">
+  <label class="label label-default">Needed items</label>
+  <item-view *ngFor="let item of model.neededItems" [item]="item"></item-view>
+</div>

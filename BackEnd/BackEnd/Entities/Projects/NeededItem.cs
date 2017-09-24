@@ -19,9 +19,9 @@ namespace BackEnd.Entities.Projects
 		[ForeignKey("ProjectId")]
 		public Project Project { get; set; }
 
-		public int? Quantity { get; set; }
+		public int Quantity { get; set; }
 
-		public int? Needed { get; set; }
+		public int Needed { get; set; }
 
 		[Required]
 		public string Name { get; set; }

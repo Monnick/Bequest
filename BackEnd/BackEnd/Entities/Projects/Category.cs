@@ -15,6 +15,8 @@ namespace BackEnd.Entities.Projects
 
 		[Required]
 		public string Title { get; set; }
+		
+		public ICollection<Project> Projects { get; set; }
 
 		public Category()
 		{

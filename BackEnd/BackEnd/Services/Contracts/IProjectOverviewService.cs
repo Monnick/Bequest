@@ -8,12 +8,8 @@ namespace BackEnd.Services.Contracts
 {
     public interface IProjectOverviewService : IBasicService
 	{
-		ProjectThumbnail Get(Guid projectId);
+		ProjectView Get(Guid projectId);
 
-		IEnumerable<Guid> GetLatestProjects(int count, int offset);
-
-		IEnumerable<Guid> GetTopProjects(int count, int offset);
-
-		IEnumerable<Guid> GetProjectsByCountry(int count, int offset, string country);
+		IEnumerable<ProjectThumbnail> GetProjects(int pageNumber, int pageSize, OrderBy order, string category, string country);
 	}
 }

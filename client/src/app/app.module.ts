@@ -18,6 +18,7 @@ import { AccountService } from './services/account.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AppConfig } from './app.config';
 import { AlertService } from './services/alert.service';
+import { ProjectViewService } from './services/project-view.service';
 import { AuthGuard } from './guards/auth-guard';
 import { ProjectEditDataComponent } from './components/project/project-edit-data/project-edit-data.component';
 import { ProjectEditPictureComponent } from './components/project/project-edit-picture/project-edit-picture.component';
@@ -33,6 +34,11 @@ import { FileUploadModule } from "ng2-file-upload";
 import { ItemService } from './services/item.service';
 import { UpDownInputComponent } from './components/up-down-input/up-down-input.component';
 import { ProjectInfoComponent } from './components/my-projects/project-info/project-info.component';
+import { NeededItemViewComponent } from './components/my-projects/needed-item-view/needed-item-view.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { ProjectThumbnailComponent } from './components/home/project-thumbnail/project-thumbnail.component';
+import { ItemViewComponent } from './components/project-view/item-view/item-view.component';
+import { PagedViewComponent } from './components/home/paged-view/paged-view.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +58,12 @@ import { ProjectInfoComponent } from './components/my-projects/project-info/proj
     ProjectEditItemsComponent,
     TinyEditorDirective,
     UpDownInputComponent,
-    ProjectInfoComponent
+    ProjectInfoComponent,
+    ProjectThumbnailComponent,
+    NeededItemViewComponent,
+    ProjectViewComponent,
+    ItemViewComponent,
+    PagedViewComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +83,8 @@ import { ProjectInfoComponent } from './components/my-projects/project-info/proj
     AuthenticationService,
     AccountService,
     ProjectService,
-    ItemService
+    ItemService,
+    ProjectViewService
   ],
   bootstrap: [AppComponent]
 })

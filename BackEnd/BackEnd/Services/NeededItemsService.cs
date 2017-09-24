@@ -27,8 +27,8 @@ namespace BackEnd.Services
 				{
 					Id = i.Id,
 					Name = i.Name,
-					Needed = i.Needed ?? 0,
-					Quantity = i.Quantity ?? 0
+					Needed = i.Needed,
+					Quantity = i.Quantity
 				})
 			};
 		}

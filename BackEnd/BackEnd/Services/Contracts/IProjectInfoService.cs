@@ -9,12 +9,10 @@ namespace BackEnd.Services.Contracts
 {
     public interface IProjectInfoService : IBasicService
 	{
-		IEnumerable<Guid> GetProjectIds(Guid accountId);
-
 		IEnumerable<ProjectInfo> GetProjects(Guid accountId);
-
-		ProjectInfo GetProject(Guid projectId);
-
+		
 		void SetProjectState(Guid accountId, Guid projectId, State state);
-    }
+
+		NeededItems UpdateNeededItems(NeededItems items);
+	}
 }

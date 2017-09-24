@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading"(click)="onClicked()"><b>{{ title }}</b><span  style="float:right;" class="glyphicon" [ngClass]="{'glyphicon-chevron-up': isExpanded && isEnabled,'glyphicon-chevron-down': !isExpanded && isEnabled, 'glyphicon-remove': !isEnabled }"></span></div>
+    <div class="panel-heading" (click)="onClicked()"><b>{{ title }}</b><span style="float:right;" class="glyphicon" [ngClass]="{'glyphicon-chevron-up': isExpanded && isEnabled,'glyphicon-chevron-down': !isExpanded && isEnabled, 'glyphicon-remove': !isEnabled }"></span></div>
     <div class="panel-body" [hidden]="!isExpanded">
       <ng-content></ng-content>
     </div>

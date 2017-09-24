@@ -7,6 +7,7 @@ using BackEnd.Contexts;
 using AutoMapper;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using BackEnd.Services.Contracts;
 
 namespace BackEnd.Services
 {
@@ -14,55 +15,113 @@ namespace BackEnd.Services
 	{
 		public ProjectOverviewService(DataContext context) : base(context) { }
 
-		public IEnumerable<Guid> GetLatestProjects(int count, int offset)
+		public IEnumerable<ProjectThumbnail> GetProjects(int offset, int count, OrderBy order, string category, string country)
 		{
-			return GetProjects(GetCurrentProjects(count, offset).OrderByDescending(p => p.UpdatedAt));
-		}
-		
-		public IEnumerable<Guid> GetProjectsByCountry(int count, int offset, string country)
-		{
-			return GetProjects(GetCurrentProjects(count, offset).Where(p => p.Country.Name == country || p.Country.Code == country));
+			return FormatProjects(OrderProjects(FilterProjects(GetProjects(offset, count), category, country), order));
 		}
 
-		public IEnumerable<Guid> GetTopProjects(int count, int offset)
+		private IQueryable<Entities.Projects.Project> GetProjects(int offset, int count)
 		{
-			return GetProjects(GetCurrentProjects(count, offset).OrderByDescending(p => p.Views));
-		}
-		
-		private IQueryable<Entities.Projects.Project> GetCurrentProjects(int count, int offset)
-		{
-			return Context.Projects.Include(c => c.Country).Include(c => c.Category);//.Where(p => p.State == Entities.State.Online).Take(count).Skip(offset);
+			return Context.Projects.Include(c => c.Country).Include(c => c.Category).Take(count).Skip(offset);
 		}
 
-		private IEnumerable<Guid> GetProjects(IQueryable<Entities.Projects.Project> projects)
+		private IQueryable<Entities.Projects.Project> OrderProjects(IQueryable<Entities.Projects.Project> projects, OrderBy order)
 		{
-			return projects.Select(p => p.Id);
-		}
-
-		public ProjectThumbnail Get(Guid projectId)
-		{
-			var entity = Context.Projects.Include(p => p.Category).Include(p => p.Country).Single(p => p.Id == projectId);
-
-			return new ProjectThumbnail
+			switch (order)
 			{
-				Id = entity.Id,
-				Title = entity.Title,
-				Category = entity.Category == null ? string.Empty : entity.Category.Title,
-				Country = entity.Country.Name,
-				Views = entity.Views
-			};
+				case OrderBy.Undefined:
+					return projects;
+				case OrderBy.Views:
+					return projects.OrderByDescending(p => p.Views);
+				case OrderBy.Updated:
+					return projects.OrderByDescending(p => p.UpdatedAt);
+				default:
+					return projects;
+			}
 		}
 
-		//private IEnumerable<ProjectThumbnail> GetProjects(IQueryable<Entities.Projects.Project> projects)
-		//{
-		//	return projects.Select(p => new ProjectThumbnail
-		//	{
-		//		Id = p.Id,
-		//		Title = p.Title,
-		//		Category = p.Category == null ? string.Empty : p.Category.Title,
-		//		Country = p.Country.Name,
-		//		Views = p.Views
-		//	});
-		//}
+		private IQueryable<Entities.Projects.Project> FilterProjects(IQueryable<Entities.Projects.Project> projects, string category, string country)
+		{
+			Guid? countryId = null;
+			Guid? categoryId = null;
+
+			if (!string.IsNullOrEmpty(country))
+				countryId = Context.Countries.Where(c => c.Name == country).Select(c => c.Id).FirstOrDefault();
+
+			if (!string.IsNullOrEmpty(category))
+				categoryId = Context.Categories.Where(c => c.Title == category).Select(c => c.Id).FirstOrDefault();
+
+			return projects.Where(p => (categoryId == null || p.CategoryId == categoryId) && (countryId == null || p.CountryId == countryId) && p.State == Entities.State.Online);
+		}
+
+		private IEnumerable<ProjectThumbnail> FormatProjects(IQueryable<Entities.Projects.Project> projects)
+		{
+			return projects.Select(p => new {
+				Id = p.Id,
+				Category = p.Category == null ? string.Empty : p.Category.Title,
+				Initiator = p.ContactName,
+				Title = p.Title,
+				Country = p.Country == null ? string.Empty : p.Country.Name,
+				Views = p.Views,
+				UpdatedAt = p.UpdatedAt
+			}
+			).ToList().Select(p => new ProjectThumbnail
+			{
+				Id = p.Id,
+				Category = p.Category,
+				Initiator = p.Initiator,
+				Title = p.Title,
+				Country = p.Country,
+				Views = p.Views,
+				UpdatedAt = p.UpdatedAt
+			});
+		}
+
+		public ProjectView Get(Guid projectId)
+		{
+			var entity = Context.Projects.Include(p => p.Category).Include(p => p.Country).Include(p => p.Items).Single(p => p.Id == projectId);
+			entity.Views++;
+			Context.Projects.Update(entity);
+			Context.SaveChanges();
+
+			var content = Context.Content.Single(c => c.ProjectId == projectId);
+
+			var result = new ProjectView
+			{
+				Title = entity.Title,
+				Category = entity.Category?.Title,
+				NeededItems = entity.Items.Select(i => new NeededItem
+				{
+					Id = i.Id,
+					Name = i.Name,
+					Needed = i.Needed,
+					Quantity = i.Quantity
+				}),
+				ContactData = new Models.Contact
+				{
+					Name = entity.ContactName,
+					Email = entity.Email,
+					Phone = entity.Phone,
+					Street = entity.Street,
+					City = entity.City,
+					Zip = entity.Zip,
+					Country = entity.Country.Name
+				},
+				Content = content.Data
+			};
+
+			return result;
+		}
+
+		private IEnumerable<ProjectThumbnail> GetProjects(IQueryable<Entities.Projects.Project> projects)
+		{
+			return projects.Select(p => new ProjectThumbnail
+			{
+				Id = p.Id,
+				Title = p.Title,
+				Category = p.Category == null ? string.Empty : p.Category.Title,
+				Country = p.Country.Name
+			});
+		}
 	}
 }

@@ -1,0 +1,16 @@
+<a [routerLink]="['/overview', project.id]">
+  <div class="well row">
+    <div class="col-md-6">
+      <label>{{ project.title }}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="label label-default text-right">{{ project.category }}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="label label-default">from {{ project.initiator }}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="label label-default text-right">Country: {{ project.country }}</label>
+    </div>
+  </div>
+</a>

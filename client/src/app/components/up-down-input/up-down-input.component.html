@@ -1,9 +1,9 @@
-<div class="input-group">
+<div class="input-group" style="min-width: 137px;">
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="decrease()"><span class="glyphicon glyphicon-minus"></span></button>
+    <button class="btn btn-default" [ngClass]="additionalClasses" type="button" (click)="decrease()"><span class="glyphicon glyphicon-minus"></span></button>
   </span>
-  <input type="number" class="form-control" name="inputField" (change)="updateValue()" [ngModelOptions]="{standalone: true}" [min]="min" [(ngModel)]="value"/>
+  <input type="number" class="form-control" [ngClass]="additionalClasses" name="inputField" (change)="updateValue()" [ngModelOptions]="{standalone: true}" [min]="min" [(ngModel)]="value"/>
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="increase()"><span class="glyphicon glyphicon-plus"></span></button>
+    <button class="btn btn-default" [ngClass]="additionalClasses" type="button" (click)="increase()"><span class="glyphicon glyphicon-plus"></span></button>
   </span>
 </div>

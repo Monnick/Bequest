@@ -22,12 +22,12 @@ namespace BackEnd.Services
 
 		public IEnumerable<Models.Country> GetCountries()
 		{
-			return Context.Countries.Select(c => new Models.Country { Name = c.Name, Code = c.Code });
+			return Context.Countries.Select(c => new Models.Country { Name = c.Name, Code = c.Code }).ToList();
 		}
 
 		public IEnumerable<Models.Category> GetCategories()
 		{
-			return Context.Categories.Select(c => new Models.Category { Title = c.Title });
+			return Context.Categories.Include(c => c.Projects).OrderByDescending(c => c.Projects.Count).Select(c => new Models.Category { Title = c.Title }).ToList();
 		}
 
 		protected bool IsValidEmail(string email)

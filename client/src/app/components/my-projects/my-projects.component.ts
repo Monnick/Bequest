@@ -30,5 +30,4 @@ export class MyProjectsComponent extends BasicComponent implements OnInit {
       this.handleError(error);
     });
   }
-
 }

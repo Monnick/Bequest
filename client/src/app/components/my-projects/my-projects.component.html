@@ -1,8 +1,7 @@
+<alert></alert>
 <div class="container-fluid">
   <div *ngFor="let p of projects" class="col-sm-5 col-sm-offset-1">
-    <a [routerLink]="['/project', p.id]">
-      <project-info [project]="p"></project-info>
-    </a>
+    <project-info [project]="p"></project-info>
   </div>
   <div class="col-sm-5 col-sm-offset-1">
     <a routerLink="/project/new">

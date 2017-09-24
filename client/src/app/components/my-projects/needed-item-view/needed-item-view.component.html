@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="33%">Name</th>
+        <th width="33%">Received</th>
+        <th width="33%">Needed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>
+          <label class="label label-default">{{ item.name }}</label>
+        </td>
+        <td>
+          <up-down-input additionalClasses="input-sm" [value]="item.quantity" (valueChange)="item.quantity=$event; updateValue();" name="quantity"></up-down-input>
+        </td>
+        <td>
+          <up-down-input additionalClasses="input-sm" [(value)]="item.needed" (valueChange)="item.needed=$event; updateValue();" name="needed"></up-down-input>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

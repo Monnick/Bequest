@@ -5,20 +5,16 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models.Projects
 {
-    public class ProjectThumbnail
+    public class ProjectView
 	{
-		public Guid Id { get; set; }
-
 		public string Title { get; set; }
 
-		public string Initiator { get; set; }
+		public Contact ContactData { get; set; }
 
 		public string Category { get; set; }
 
-		public string Country { get; set; }
+		public string Content { get; set; }
 
-		public int Views { get; set; }
-
-		public DateTime UpdatedAt { get; set; }
+		public IEnumerable<NeededItem> NeededItems { get; set; }
 	}
 }

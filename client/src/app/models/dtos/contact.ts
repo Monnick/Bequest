@@ -1,17 +1,17 @@
 
 export class Contact {
     
-		name : string;
-		
-		street : string;
+	name : string;
+	
+	street : string;
 
-		city : string;
+	city : string;
 
-		zip : string;
+	zip : string;
 
-		country : string;
+	country : string;
 
-		phone : string;
+	phone : string;
 
-		email : string;
+	email : string;
 }

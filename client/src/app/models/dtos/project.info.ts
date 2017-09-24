@@ -1,3 +1,4 @@
+import { NeededItem } from './neededItem';
 
 export class ProjectInfo {
 
@@ -13,5 +14,7 @@ export class ProjectInfo {
 
   updatedAt : Date;
   
-  possibleStates : number[] = [ 0 ];  
+  possibleStates : number[] = [ 0 ];
+
+  neededItems : NeededItem[];
 }

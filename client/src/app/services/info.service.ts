@@ -1,3 +1,6 @@
+import { NeededItems } from './../models/dtos/neededItems';
+import { NeededItem } from './../models/dtos/neededItem';
+import { State } from './../models/state';
 import { Injectable } from '@angular/core';
 import { SecuredService } from './secured.service';
 import { Http } from '@angular/http';
@@ -12,15 +15,15 @@ export class InfoService extends SecuredService {
     super(config.apiUrl + '/info', http);
   }
 
-  getIds() : Observable<string[]> {
-    return this._get('/ids');
-  }
-
   getProjects() : Observable<ProjectInfo[]> {
     return this._get('/');
   }
 
-  getInfo(projectId : string) : Observable<ProjectInfo> {
-    return this._get('/' + projectId);
+  updateItems(id : string, neededItems : NeededItem[]) {
+    let i = new NeededItems();
+    i.projectId = id;
+    i.items = neededItems;
+
+    return this._update(i);
   }
 }

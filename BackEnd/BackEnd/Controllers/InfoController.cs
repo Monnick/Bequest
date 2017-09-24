@@ -26,29 +26,23 @@ namespace BackEnd.Controllers
 			: base(projectService, appSettings.Value)
 		{
 		}
-
-		[HttpGet("ids")]
-		public IActionResult GetProjectIds()
-		{
-			return SecuredCall(accountId => Service.GetProjectIds(accountId));
-		}
-
-		[HttpGet("{projectId}")]
-		public IActionResult GetProject(Guid projectId)
-		{
-			return SecuredCall(accountId => Service.GetProject(projectId));
-		}
-
+		
 		[HttpGet("")]
 		public IActionResult GetAll()
 		{
 			return SecuredCall(accountId => Service.GetProjects(accountId));
 		}
 		
-		[HttpPut("{projectId}/{state}")]
-		public IActionResult SetState(Guid projectId, State state)
+		//[HttpPut("{projectId}/{state}")]
+		//public IActionResult SetState(Guid projectId, State state)
+		//{
+		//	return SecuredCall(accountId => Service.SetProjectState(accountId, projectId, state));
+		//}
+
+		[HttpPut("")]
+		public IActionResult UpdateItems([FromBody] NeededItems items)
 		{
-			return SecuredCall(accountId => Service.SetProjectState(accountId, projectId, state));
+			return SecuredCall(accountId => Service.UpdateNeededItems(items));
 		}
 	}
 }
