@@ -17,12 +17,12 @@ namespace BackEnd.Services
 
 		public IEnumerable<ProjectThumbnail> GetProjects(int offset, int count, OrderBy order, string category, string country)
 		{
-			return FormatProjects(OrderProjects(FilterProjects(GetProjects(offset, count), category, country), order));
+			return FormatProjects(ShrinkResult(OrderProjects(FilterProjects(GetProjects(), category, country), order), count, offset));
 		}
 
-		private IQueryable<Entities.Projects.Project> GetProjects(int offset, int count)
+		private IQueryable<Entities.Projects.Project> GetProjects()
 		{
-			return Context.Projects.Include(c => c.Country).Include(c => c.Category).Take(count).Skip(offset);
+			return Context.Projects.Include(c => c.Country).Include(c => c.Category);
 		}
 
 		private IQueryable<Entities.Projects.Project> OrderProjects(IQueryable<Entities.Projects.Project> projects, OrderBy order)
@@ -52,6 +52,11 @@ namespace BackEnd.Services
 				categoryId = Context.Categories.Where(c => c.Title == category).Select(c => c.Id).FirstOrDefault();
 
 			return projects.Where(p => (categoryId == null || p.CategoryId == categoryId) && (countryId == null || p.CountryId == countryId) && p.State == Entities.State.Online);
+		}
+
+		private IQueryable<Entities.Projects.Project> ShrinkResult(IQueryable<Entities.Projects.Project> projects, int count, int offset)
+		{
+			return projects.Skip(offset).Take(count);
 		}
 
 		private IEnumerable<ProjectThumbnail> FormatProjects(IQueryable<Entities.Projects.Project> projects)

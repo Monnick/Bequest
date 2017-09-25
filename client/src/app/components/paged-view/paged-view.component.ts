@@ -1,9 +1,9 @@
-import { BasicComponent } from './../../basic.component';
-import { AlertService } from './../../../services/alert.service';
-import { SecuredService } from './../../../services/secured.service';
-import { ProjectViewService } from './../../../services/project-view.service';
-import { ProjectThumbnail } from './../../../models/dtos/project.thumbnail';
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { BasicComponent } from './../basic.component';
+import { AlertService } from './../../services/alert.service';
+import { SecuredService } from './../../services/secured.service';
+import { ProjectViewService } from './../../services/project-view.service';
+import { ProjectThumbnail } from './../../models/dtos/project.thumbnail';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'paged-view',
@@ -17,6 +17,7 @@ export class PagedViewComponent extends BasicComponent implements OnInit, OnChan
   @Input('title') title : string;
   @Input('orderBy') orderBy : string;
   @Input('page') page : number = 0;
+  @Input('size') size : number = this.PAGE_SIZE;
   @Input('category') category : string;
   @Input('country') country : string;
 
@@ -28,17 +29,19 @@ export class PagedViewComponent extends BasicComponent implements OnInit, OnChan
   }
 
   ngOnInit() {
-    if(!this.delayedLoading)
+    if(!this.delayedLoading) {
       this.loadProjects();
+    }
   }
 
-  ngOnChanges() {
-    if(this.delayedLoading)
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.delayedLoading && ((changes.category && changes.category.currentValue) || (changes.country && changes.country.currentValue))) {
       this.loadProjects();
+    }
   }
 
   loadProjects() {
-    this.viewService.getMany(this.category, this.country, this.orderBy, this.page.toString(), this.PAGE_SIZE.toString()).subscribe(projects => {
+    this.viewService.getMany(this.category, this.country, this.orderBy, this.page.toString(), this.size.toString()).subscribe(projects => {
       this.projects = projects;
     }, error => {
       this.handleError(error);

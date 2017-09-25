@@ -43,7 +43,9 @@ namespace BackEnd.Controllers
 			if (!int.TryParse(size, out pageSize))
 				pageSize = DEFAULT_PAGE_SIZE;
 
-			return Ok(Service.GetProjects(pageNumber, pageSize, order, category, country));
+			int offset = pageNumber * pageSize;
+
+			return Ok(Service.GetProjects(offset, pageSize, order, category, country));
 		}
 	}
 }

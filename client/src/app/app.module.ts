@@ -36,9 +36,10 @@ import { UpDownInputComponent } from './components/up-down-input/up-down-input.c
 import { ProjectInfoComponent } from './components/my-projects/project-info/project-info.component';
 import { NeededItemViewComponent } from './components/my-projects/needed-item-view/needed-item-view.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
-import { ProjectThumbnailComponent } from './components/home/project-thumbnail/project-thumbnail.component';
+import { ProjectThumbnailComponent } from './components/project-thumbnail/project-thumbnail.component';
 import { ItemViewComponent } from './components/project-view/item-view/item-view.component';
-import { PagedViewComponent } from './components/home/paged-view/paged-view.component';
+import { PagedViewComponent } from './components/paged-view/paged-view.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PagedViewComponent } from './components/home/paged-view/paged-view.comp
     NeededItemViewComponent,
     ProjectViewComponent,
     ItemViewComponent,
-    PagedViewComponent
+    PagedViewComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,

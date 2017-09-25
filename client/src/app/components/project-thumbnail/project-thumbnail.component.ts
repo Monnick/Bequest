@@ -1,4 +1,4 @@
-import { ProjectThumbnail } from './../../../models/dtos/project.thumbnail';
+import { ProjectThumbnail } from './../../models/dtos/project.thumbnail';
 import { Component, Input } from '@angular/core';
 
 @Component({

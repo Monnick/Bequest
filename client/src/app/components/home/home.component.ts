@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent extends BasicComponent implements OnInit {
 
-  countries : Country[];
   categories : Category[];
   categoryFilter : string;
 
@@ -28,15 +27,10 @@ export class HomeComponent extends BasicComponent implements OnInit {
 
   loadCategories() {
     this.viewService.getCategories().subscribe(categories => {
-      this.categories = categories
-    }, error => {
-      this.handleError(error);
-    });
-  }
+      this.categories = categories;
 
-  loadCountries() {
-    this.viewService.getCountries().subscribe(countries => {
-      this.countries = countries
+      if(categories.length > 1)
+        this.categoryFilter = categories[0].title;
     }, error => {
       this.handleError(error);
     });

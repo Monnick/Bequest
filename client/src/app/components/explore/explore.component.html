@@ -1,0 +1,10 @@
+<paged-view *ngIf="categories" delayedLoading="true" [category]="activeCategory" size="9" title="" orderBy="mv" (change)="activeCategory = $event.target.value">
+  <select [(ngModel)]="activeCategory">
+    <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+  </select>
+</paged-view>
+<paged-view *ngIf="countries" delayedLoading="true" [country]="activeCountry" size="9" title="" orderBy="mv" (change)="activeCountry = $event.target.value">
+  <select [(ngModel)]="activeCountry">
+    <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+  </select>
+</paged-view>

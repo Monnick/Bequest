@@ -10,6 +10,6 @@ namespace BackEnd.Services.Contracts
 	{
 		ProjectView Get(Guid projectId);
 
-		IEnumerable<ProjectThumbnail> GetProjects(int pageNumber, int pageSize, OrderBy order, string category, string country);
+		IEnumerable<ProjectThumbnail> GetProjects(int offset, int count, OrderBy order, string category, string country);
 	}
 }

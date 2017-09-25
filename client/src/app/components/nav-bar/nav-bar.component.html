@@ -15,6 +15,13 @@
     <div class="collapse navbar-collapse" id="navbar-to-collapse">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/" href="#">Projects</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/explore/category" href="#">By category</a></li>
+            <li><a routerLink="/explore/country" href="#">By country</a></li>
+          </ul>
+        </li>
         <li *ngIf="isLoggedIn" routerLinkActive="active"><a routerLink="/myprojects" href="#">My projects</a></li>
         <li *ngIf="isLoggedIn" routerLinkActive="active"><a [routerLink]="['/account', currentAccountId]" href="#">Account</a></li>
         <li *ngIf="!isLoggedIn" routerLinkActive="active"><a routerLink="/register/" href="#">Register</a></li>

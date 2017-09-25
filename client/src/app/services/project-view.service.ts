@@ -1,3 +1,5 @@
+import { Country } from './../models/dtos/country';
+import { Category } from './../models/dtos/category';
 import { ProjectThumbnail } from './../models/dtos/project.thumbnail';
 import { SecuredService } from './secured.service';
 import { ProjectView } from './../models/dtos/project.view';
@@ -18,11 +20,11 @@ export class ProjectViewService extends SecuredService {
     return this._get('/' + projectId);
   }
   
-  getCountries() {
+  getCountries() : Observable<Country[]> {
     return this._get('/countries');
   }
   
-  getCategories() {
+  getCategories() : Observable<Category[]> {
     return this._get('/categories');
   }
 
