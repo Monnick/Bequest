@@ -19,11 +19,8 @@ namespace Edit.Project
 			var configuration = builder.Build();
 
 			string secret = configuration.GetSection("secret").Value;
-
-			var publisher = new FakeBus.Publish.Publisher(null);
-
+			
 			Bootstrapper.RegisterSingleton(new AppSettings(secret));
-			Bootstrapper.RegisterSingleton<IPublisher>(publisher);
 
 			new HostBuilder<Startup>("http://*:8888").Run();
 		}

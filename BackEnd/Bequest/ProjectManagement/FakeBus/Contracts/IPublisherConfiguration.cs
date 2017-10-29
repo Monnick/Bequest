@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FakeBus.Contracts
 {
-    public interface IDataLayerAccess
+    public interface IPublisherConfiguration
     {
     }
 }

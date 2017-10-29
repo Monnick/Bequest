@@ -15,29 +15,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PictureManagement", "Pictur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectManagement", "ProjectManagement", "{FEAFBCB3-175B-42DE-98A3-3737130D7A9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureService", "PictureManagement\PictureService\PictureService.csproj", "{1E8BC20C-6815-4B1D-B1BF-D04614C2C961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PictureService", "PictureManagement\PictureService\PictureService.csproj", "{1E8BC20C-6815-4B1D-B1BF-D04614C2C961}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureStorage", "PictureManagement\PictureStorage\PictureStorage.csproj", "{C136DDC6-64D3-48DE-A7C2-949683C2CBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PictureStorage", "PictureManagement\PictureStorage\PictureStorage.csproj", "{C136DDC6-64D3-48DE-A7C2-949683C2CBC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureStorage.SQL", "PictureManagement\PictureStorage.SQL\PictureStorage.SQL.csproj", "{96434C79-3D29-40E7-B504-C056484FF97A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PictureStorage.SQL", "PictureManagement\PictureStorage.SQL\PictureStorage.SQL.csproj", "{96434C79-3D29-40E7-B504-C056484FF97A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedService", "SharedService\SharedService.csproj", "{9E33FF1F-089B-466A-9406-2EB4695BCAC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedService", "SharedService\SharedService.csproj", "{9E33FF1F-089B-466A-9406-2EB4695BCAC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "ProjectManagement\Storage\Storage.csproj", "{44B2D57E-17B1-46A9-BD99-7C11899403B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "ProjectManagement\Storage\Storage.csproj", "{44B2D57E-17B1-46A9-BD99-7C11899403B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBus", "ProjectManagement\FakeBus\FakeBus.csproj", "{21CD0BC7-3260-45EA-B375-41FC0903F121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBus", "ProjectManagement\FakeBus\FakeBus.csproj", "{21CD0BC7-3260-45EA-B375-41FC0903F121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edit.Project", "ProjectManagement\Edit.Project\Edit.Project.csproj", "{0464962E-89FF-4AFD-BC77-353E6FB51EA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Edit.Project", "ProjectManagement\Edit.Project\Edit.Project.csproj", "{0464962E-89FF-4AFD-BC77-353E6FB51EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Domain", "ProjectManagement\Project.Domain\Project.Domain.csproj", "{82B5E96A-8DBA-4A68-A1A7-2E9146B98A12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Domain", "ProjectManagement\Project.Domain\Project.Domain.csproj", "{82B5E96A-8DBA-4A68-A1A7-2E9146B98A12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Commands", "ProjectManagement\Project.Commands\Project.Commands.csproj", "{43B06A09-D92C-482D-AAF5-1EC358846582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Commands", "ProjectManagement\Project.Commands\Project.Commands.csproj", "{43B06A09-D92C-482D-AAF5-1EC358846582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Events", "ProjectManagement\Project.Events\Project.Events.csproj", "{046722BD-FF36-492C-B517-239E3CF3E5D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Events", "ProjectManagement\Project.Events\Project.Events.csproj", "{046722BD-FF36-492C-B517-239E3CF3E5D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Shared", "ProjectManagement\Project.Shared\Project.Shared.csproj", "{6EBFF6D7-40B5-4B59-8298-669918967316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Shared", "ProjectManagement\Project.Shared\Project.Shared.csproj", "{6EBFF6D7-40B5-4B59-8298-669918967316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edit.Shared", "ProjectManagement\Edit.Shared\Edit.Shared.csproj", "{A3F99194-7C80-4164-99DC-D09353EA9AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Edit.Shared", "ProjectManagement\Edit.Shared\Edit.Shared.csproj", "{A3F99194-7C80-4164-99DC-D09353EA9AD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBus.Http", "ProjectManagement\FakeBus.Http\FakeBus.Http.csproj", "{67B2B957-B5A1-4929-8F77-1E24EB19D237}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{A3F99194-7C80-4164-99DC-D09353EA9AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3F99194-7C80-4164-99DC-D09353EA9AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3F99194-7C80-4164-99DC-D09353EA9AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B2B957-B5A1-4929-8F77-1E24EB19D237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B2B957-B5A1-4929-8F77-1E24EB19D237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B2B957-B5A1-4929-8F77-1E24EB19D237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B2B957-B5A1-4929-8F77-1E24EB19D237}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{046722BD-FF36-492C-B517-239E3CF3E5D7} = {FEAFBCB3-175B-42DE-98A3-3737130D7A9C}
 		{6EBFF6D7-40B5-4B59-8298-669918967316} = {FEAFBCB3-175B-42DE-98A3-3737130D7A9C}
 		{A3F99194-7C80-4164-99DC-D09353EA9AD9} = {FEAFBCB3-175B-42DE-98A3-3737130D7A9C}
+		{67B2B957-B5A1-4929-8F77-1E24EB19D237} = {FEAFBCB3-175B-42DE-98A3-3737130D7A9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2814FC13-25B4-4C23-BD50-25D3C98D245B}
